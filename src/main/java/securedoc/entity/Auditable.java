@@ -40,4 +40,22 @@ public abstract class Auditable {
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
+    @PrePersist
+    public void prePersist() {
+        var userId = 1L;
+        if (userId == null) throw new APIException("Cannot persist entity");
+        setCreatedBy(userId);
+        setUpdatedBy(userId);
+        setUpdatedAt(LocalDateTime.now());
+        setCreatedAt(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void prePersist() {
+        var userId = 1L;
+        if (userId == null) throw new APIException("Cannot persist entity");
+        setUpdatedAt(LocalDateTime.now());
+        setCreatedAt(LocalDateTime.now());
+    }
+
 }
