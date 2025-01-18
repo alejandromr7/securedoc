@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.AlternativeJdkIdGenerator;
+import securedoc.entity.exception.ApiException;
 
 import java.time.LocalDateTime;
 
@@ -43,7 +44,7 @@ public abstract class Auditable {
     @PrePersist
     public void prePersist() {
         var userId = 1L;
-        if (userId == null) throw new APIException("Cannot persist entity");
+        if (userId == null) throw new ApiException("Cannot persist entity");
         setCreatedBy(userId);
         setUpdatedBy(userId);
         setUpdatedAt(LocalDateTime.now());
@@ -53,7 +54,7 @@ public abstract class Auditable {
     @PreUpdate
     public void prePersist() {
         var userId = 1L;
-        if (userId == null) throw new APIException("Cannot persist entity");
+        if (userId == null) throw new ApiException("Cannot persist entity");
         setUpdatedAt(LocalDateTime.now());
         setCreatedAt(LocalDateTime.now());
     }
